@@ -1,0 +1,29 @@
+local Lighting = game:GetService("Lighting")
+
+-- Remove efeitos visuais que causam estouro
+for _,v in ipairs(Lighting:GetChildren()) do
+    if v:IsA("BloomEffect")
+    or v:IsA("SunRaysEffect")
+    or v:IsA("ColorCorrectionEffect") then
+        v:Destroy()
+    end
+end
+
+-- Corta luzes exageradas
+for _,v in ipairs(game:GetDescendants()) do
+    if v:IsA("PointLight")
+    or v:IsA("SpotLight")
+    or v:IsA("SurfaceLight") then
+
+        if v.Brightness > 1 then
+            v.Brightness = 1
+        end
+    end
+
+    if v:IsA("Highlight") then
+        v.Enabled = false
+    end
+end
+
+-- Reduz apenas exposição excessiva
+Lighting.ExposureCompensation = -0.5
