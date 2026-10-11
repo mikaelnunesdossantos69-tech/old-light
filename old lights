@@ -27,3 +27,25 @@ end
 
 -- Reduz apenas exposição excessiva
 Lighting.ExposureCompensation = -0.5
+local Lighting = game:GetService("Lighting")
+
+-- remove efeitos modernos
+for _,v in pairs(Lighting:GetChildren()) do
+	if v:IsA("PostEffect") or v:IsA("Atmosphere") then
+		v:Destroy()
+	end
+end
+
+Lighting.Technology = Enum.Technology.Compatibility
+Lighting.Brightness = 1.5
+Lighting.GlobalShadows = false
+Lighting.Ambient = Color3.fromRGB(150,150,150)
+Lighting.OutdoorAmbient = Color3.fromRGB(150,150,150)
+Lighting.FogEnd = 100000000000000000000
+Lighting.ClockTime = 14
+
+-- efeito leve antigo
+local cc = Instance.new("ColorCorrectionEffect")
+cc.Saturation = -0.05
+cc.Contrast = 0
+cc.Parent = Lighting
